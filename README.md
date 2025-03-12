@@ -30,20 +30,15 @@ cd car-crud-time-calculator
 
 ### Install PHP dependencies using Composer
 
-1. **Install Composer** (if it's not already installed):
-   
-   Composer is a PHP dependency manager that you need to install before you can install the project dependencies.
 
-   - Follow the official instructions to install Composer: [Composer Installation Guide](https://getcomposer.org/download/)
-
-2. **Install the project dependencies**:
+1. **Install the project dependencies**:
 
    Once Composer is installed, navigate to the `backend` folder and run the following command to install the required PHP dependencies for the Symfony project:
 
    ```sh
    composer install
 
-3. **Create the `.env` file:**
+2. **Create the `.env` file:**
 
     Copy `.env.example` to `.env`:
 
@@ -102,4 +97,4 @@ cd car-crud-time-calculator
     ```
 ## ℹ️ Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For comprehensive Angular documentation and guides, visit the official [Angular documentation](https://angular.dev/). For specific help with the Angular CLI, use `ng help`.
