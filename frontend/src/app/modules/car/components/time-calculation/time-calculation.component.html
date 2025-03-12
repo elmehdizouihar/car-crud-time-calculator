@@ -1,0 +1,48 @@
+<div class="container">
+  <mat-card class="center-card mat-card mt-5">
+    <mat-card-header class="justify-content-center">
+      <mat-card-title class="text-primary">Calcul du Temps de Trajet</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="calculateTime()">
+        <!-- Modèle -->
+        <mat-form-field class="full-width">
+          <mat-label>Modèle</mat-label>
+          <input matInput [(ngModel)]="formData.model" name="model" required />
+          <mat-error *ngIf="!formData.model">
+            Le modèle est requis
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Distance -->
+        <mat-form-field class="full-width">
+          <mat-label>Distance (km)</mat-label>
+          <input matInput [(ngModel)]="formData.distance" type="number" name="distance" required />
+          <mat-error *ngIf="!formData.distance">
+            La distance est requise
+          </mat-error>
+          <mat-error *ngIf="formData.distance && !isDistanceValid()">
+            La distance doit être un nombre valide et supérieur à zéro
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Calculer</button>
+      </form>
+
+      <mat-card-content *ngIf="calculatedTime" class="centered-content">
+        <div class="result-container">
+          <p class="result-message">Le temps qu'il faudra à la voiture pour effectuer cette distance est :</p>
+          <mat-card class="time-panel">
+            <mat-card-content>
+              <p class="time-text">{{ calculatedTimeDetails.heures }} heures et {{ calculatedTimeDetails.minutes }}
+                minutes</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <app-loading-spinner *ngIf="isSpinnerActive"></app-loading-spinner>
+
+</div>

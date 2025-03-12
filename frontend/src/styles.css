@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+body {
+    background-color: #d3d3d330 !important;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+  
+  form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  button {
+    width: 100%;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: white !important;
+}
+  
+.mat-mdc-form-field-focus-overlay {
+background-color: transparent !important;
+}
+
+.bg-primary-costum{
+  background-color: #3f51b5  ;
+}
+.text-primary-costum{
+  color: #3f51b5  ;
+}
+
+mat-form-field {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.mat-card {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+

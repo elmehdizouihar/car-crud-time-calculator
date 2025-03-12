@@ -1,0 +1,71 @@
+<div class="container">
+
+  <mat-card class="mat-card mt-3">
+
+    <mat-card-header class="justify-content-center">
+      <mat-card-title class="text-primary">{{ editing ? 'Modifier' : 'Ajouter' }} une voiture</mat-card-title>
+    </mat-card-header>
+
+    <form (ngSubmit)="saveCar()">
+
+      <mat-form-field class="full-width">
+        <mat-label>Modèle</mat-label>
+        <input matInput [(ngModel)]="car.model" name="model" required />
+        <mat-error *ngIf="!car.model">Le modèle est requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Vitesse (en Km/h)</mat-label>
+        <input matInput [(ngModel)]="car.kmh" name="kmh" type="number" required />
+        <mat-error *ngIf="!car.kmh">
+          La vitesse est requise
+        </mat-error>
+        <mat-error *ngIf="car.kmh !== null && !isKmValid()">
+          Le Vitesse (en Km/h) doit être un nombre valide et supérieur à zéro
+        </mat-error>
+      </mat-form-field>
+
+      <div *ngFor="let char of car.caracteristiques; let i = index" class="mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="flex-fill">
+            <mat-form-field class="full-width">
+              <mat-label>Caractéristique clé</mat-label>
+              <input matInput [(ngModel)]="char.key" name="key{{i}}" placeholder="Ex: Couleur" required />
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Caractéristique valeur</mat-label>
+              <input matInput [(ngModel)]="char.value" name="value{{i}}" placeholder="Ex: Rouge" required />
+            </mat-form-field>
+          </div>
+          <button type="button" mat-icon-button color="warn" (click)="removeCharacteristic(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-error *ngIf="errors.caracteristiques">
+        {{ errors.caracteristiques }}
+      </mat-error>
+
+      <div class="d-flex align-items-center mt-3" (click)="addCharacteristic()">
+
+        <button mat-mini-fab class="btn-add bg-primary">
+          <mat-icon>add</mat-icon>
+        </button><br><br>
+
+        <div class="text-primary mx-2 cursor-pointer">
+          Ajouter une caractéristique
+        </div>
+
+      </div>
+
+      <div class="text-center mt-5">
+        <button type="submit" mat-raised-button color="primary">{{ editing ? 'Modifier' : 'Ajouter' }}</button>
+      </div>
+
+    </form>
+
+  </mat-card>
+  <app-loading-spinner *ngIf="isSpinnerActive"></app-loading-spinner>
+
+</div>
