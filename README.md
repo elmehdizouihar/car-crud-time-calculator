@@ -1,5 +1,4 @@
 # car-crud-time-calculator
-# Car CRUD Time Calculator
 
 This web app offers CRUD operations for car models and calculates travel time based on distance and speed. The application is built with **API Platform on Symfony 5.4** for the backend, and **Angular 19** for the frontend.
 
@@ -19,11 +18,10 @@ Make sure you have the following installed on your machine:
 
 ### 1️⃣ Clone the Project
 
-```sh
-git clone https://github.com/elmehdizouihar/car-crud-time-calculator/car-crud-time-calculator.git
+git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
 cd car-crud-time-calculator
 
-### 2️⃣ Backend Setup
+### 2️⃣ Backend Setup (symfony)
 
 1. Navigate to the `backend` folder:
 
@@ -45,16 +43,22 @@ cd car-crud-time-calculator
    ```sh
    composer install
 
+3. **Create the `.env` file:**
+
+    Copy `.env.example` to `.env`:
+
+    ```sh
+    cp .env.example .env
+    ```
 3. **Create the `.env` file from the `.env.example` file**:
 
-   The project comes with a default environment configuration file named `.env.example`. To set up your environment, copy this file and rename it to `.env`:
+   You need to create `.env` for your environment settings. Copy `.env.example`:
 
    ```sh
    cp .env.example .env
 
-4. **Create the database and tables (if you're using one)**:
+4. **Create the database and tables**:
 
-   If your project requires a database, you need to create it and set up the necessary tables. Run the following commands:
 
    1. **Create the database**:
 
@@ -76,3 +80,26 @@ cd car-crud-time-calculator
    symfony serve
 
 > **Note**: This will launch the Symfony development server in `http://localhost:8000`.
+
+### 3️⃣ Frontend Setup (Angular)
+
+1. **Navigate to the frontend folder:**
+
+   ```sh
+   cd ../frontend
+   ```
+
+2. **Install Node.js dependencies using npm:**
+
+   ```sh
+   npm install
+   ```
+
+3. **Run the Angular development server:**
+
+   ```sh
+   ng serve
+    ```
+## ℹ️ Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
