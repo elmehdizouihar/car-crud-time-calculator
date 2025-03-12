@@ -1,4 +1,4 @@
-# car-crud-time-calculator
+# Car CRUD Time Calculator
 
 This web app offers CRUD operations for car models and calculates travel time based on distance and speed. The application is built with **API Platform on Symfony 5.4** for the backend, and **Angular 19** for the frontend.
 
