@@ -19,7 +19,6 @@ Make sure you have the following installed on your machine:
 ### 1️⃣ Clone the Project
 
 git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
-cd car-crud-time-calculator
 
 ### 2️⃣ Backend Setup (symfony)
 
