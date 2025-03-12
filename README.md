@@ -24,65 +24,59 @@ git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
 
 ### 2️⃣ Backend Setup (symfony)
 
-1. Navigate to the `backend` folder:
+1. **Navigate to the `backend` folder:**
 
-   ```sh
-   cd backend
+    ```sh
+    cd backend
+    ```
 
-### Install PHP dependencies using Composer
+2. **Install the project dependencies:**
 
+    Run the following command to install the required PHP dependencies for the Symfony project:
 
-1. **Install the project dependencies**:
+    ```sh
+    composer install
+    ```
 
-   Once Composer is installed, navigate to the `backend` folder and run the following command to install the required PHP dependencies for the Symfony project:
-
-   ```sh
-   composer install
-
-2. **Create the `.env` file:**
+3. **Create the `.env` file:**
 
     Copy `.env.example` to `.env`:
 
     ```sh
     cp .env.example .env
     ```
-3. **Create the `.env` file from the `.env.example` file**:
 
-   You need to create `.env` for your environment settings. Copy `.env.example`:
+4. **Create the database and tables:**
 
-   ```sh
-   cp .env.example .env
+    1. **Create the database:**
 
-4. **Create the database and tables**:
+        ```sh
+        php bin/console doctrine:database:create
+        ```
 
+    2. **Run the migrations to create the tables:**
 
-   1. **Create the database**:
+        ```sh
+        php bin/console doctrine:migrations:migrate
+        ```
 
-      ```sh
-      php bin/console doctrine:database:create
-      ```
+5. **Run the Symfony development server:**
 
-   2. **Run the migrations to create the tables**:
+    To start the Symfony development server, use the following command:
 
-      ```sh
-      php bin/console doctrine:migrations:migrate
-      ```
-
-5. **Run the Symfony development server**:
-
-   To start the Symfony development server, use the following command:
-
-   ```sh
-   symfony serve
-
+    ```sh
+    symfony serve
+    ```
 > **Note**: This will launch the Symfony development server in `http://localhost:8000`.
+
+<br>
 
 ### 3️⃣ Frontend Setup (Angular)
 
 1. **Navigate to the frontend folder:**
 
    ```sh
-   cd ../frontend
+   cd frontend
    ```
 
 2. **Install Node.js dependencies using npm:**
