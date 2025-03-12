@@ -90,6 +90,8 @@ git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
    ```sh
    ng serve
     ```
-## ℹ️ Further help
+   Navigate to `http://localhost:4200/` in your browser to view the application.
+   
+## ℹ️ Read more
 
-For comprehensive Angular documentation and guides, visit the official [Angular documentation](https://angular.dev/). For specific help with the Angular CLI, use `ng help`.
+For comprehensive Angular documentation and guides, visit the official [Angular documentation](https://angular.dev/).
