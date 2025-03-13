@@ -94,10 +94,10 @@ git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
 
 <br>
 
-### 4️⃣ 🎬 Application Demo
+### 4️⃣  Application Demo
 
-<video src="assets/demo.mp4" controls width="640" height="360"></video>   
-   
+<video src="assets/demo.mp4" controls width="640" height="360"></video>
+
 ## ℹ️ Read more
 
 For comprehensive Angular documentation and guides, visit the official [Angular documentation](https://angular.dev/).
