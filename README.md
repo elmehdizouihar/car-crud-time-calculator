@@ -96,7 +96,7 @@ git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
 
 ### 4️⃣ Application Demo
 
-[Voir la vidéo de démonstration]([https://www.loom.com/share/a5b7db577245499a8bbc727d73bc1de2?sid=054feb7a-aa60-4179-b497-e51589846581](https://www.veed.io/view/64d3e0b6-34fb-4ad6-b25e-7fe520f7e15b?panel=share))
+[Voir la vidéo de démonstration](https://www.veed.io/view/64d3e0b6-34fb-4ad6-b25e-7fe520f7e15b?panel=share)
 
 ## ℹ️ Read more
 
