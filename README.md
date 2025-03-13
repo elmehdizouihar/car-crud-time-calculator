@@ -91,6 +91,12 @@ git clone https://github.com/elmehdizouihar/car-crud-time-calculator.git
    ng serve
     ```
    Navigate to `http://localhost:4200/` in your browser to view the application.
+
+<br>
+
+### 4️⃣ 🎬 Application Demo
+
+<video src="assets/demo.mp4" controls width="640" height="360"></video>   
    
 ## ℹ️ Read more
 
