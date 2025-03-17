@@ -1,27 +1,20 @@
-// src/app/car-list/car-list.component.ts
 import { Component, OnInit , ViewChild, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common'; // Importer CommonModule
+import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { MatPaginatorModule } from '@angular/material/paginator'; // Si vous voulez paginer
-import { MatSortModule } from '@angular/material/sort'; // Pour trier la table
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { BrowserModule } from '@angular/platform-browser';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table'; // Ajout de MatTableDataSource
-import { MatDialogRef } from '@angular/material/dialog';
-
-import { MatSnackBar } from '@angular/material/snack-bar'; // Importez MatSnackBar
-import { MatSnackBarConfig } from '@angular/material/snack-bar'; // Importez MatSnackBarConfig
-import { MatDialogModule  } from '@angular/material/dialog';  // Ajouter MatDialogModule
-import { MatButtonModule } from '@angular/material/button';  // Ajouter MatButtonModule
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialogModule  } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmDialogComponent } from '../../../../core/shared/components/confirm-dialog/confirm-dialog.component';
 import { LoadingSpinnerComponent } from '../../../../core/shared/components/loading-spinner/loading-spinner.component';
@@ -37,9 +30,6 @@ import { Car } from '../../models/car.model';
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
-    // BrowserAnimationsModule,
-    HttpClientModule,
-    // BrowserModule,
     MatPaginator,
     RouterLink,
     NgxSpinnerModule,
@@ -76,28 +66,30 @@ export class CarListComponent implements OnInit, AfterViewInit {
   }
 
   loadCars(): void {
+    this.isSpinnerActive = true;
+
     this.carService.getCars().subscribe(
-      data => {
-        this.cars = data.cars;
+      (data: Car[]) => { 
+        this.cars = data; 
         this.totalCars = this.cars.length;
         this.dataSource.data = this.cars;
-        console.log(this.cars);
-        
-        // Mettre à jour le paginator après que les données soient chargées
+        console.log("Voitures chargées :", this.cars);
+  
         if (this.paginator) { 
           this.dataSource.paginator = this.paginator;
         }
+
+        this.isSpinnerActive = false;
       },
       error => {
         console.error('Erreur de chargement des voitures:', error);
         this.toastr.error(error, "Erreur", {
           timeOut: 3000, 
         });
+        this.isSpinnerActive = false;
       }
     );
-    
   }
-
   ngAfterViewInit(): void {
     // Lier correctement le paginator à MatTableDataSource
     if (this.paginator) {
@@ -117,33 +109,20 @@ export class CarListComponent implements OnInit, AfterViewInit {
 
   deleteCar(id: number): void {
     this.isSpinnerActive = true;
+  
     this.carService.deleteCar(id).subscribe(
       () => {
-        console.log('Voiture supprimée');
         this.isSpinnerActive = false;
-        this.toastr.success("Suppression réussie", "Succès", {
-          timeOut: 3000, 
-        });
-        this.loadCars(); 
+        this.toastr.success('Suppression réussie', 'Succès', { timeOut: 3000 });
+        this.loadCars();
       },
-      error => {
+      (error: string) => {
         this.isSpinnerActive = false;
         console.error('Erreur lors de la suppression de la voiture:', error);
-        this.toastr.error(error, "Erreur", {
-          timeOut: 3000, 
-        });
+        this.toastr.error(error, 'Erreur', { timeOut: 3000 });
       }
     );
   }
-  
 
-  editCar(id: number): void {
-    console.log('Modifier la voiture avec l\'ID:', id);
-  }
-
-
-  onPageChange(event: any): void {
-    console.log('Changement de page:', event);
-  }
 }
 

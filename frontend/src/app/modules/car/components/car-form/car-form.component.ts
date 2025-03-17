@@ -33,7 +33,7 @@ export class CarFormComponent implements OnInit {
   car: Car = { model: '', kmh: null, caracteristiques: [] };
   editing: boolean = false;
   carId: number | null = null;
-  voitures: any[] = [];
+  cars: Car[] = [];
   // Définir l'objet 'errors'
   errors: { model: string, kmh: string, caracteristiques: string } = {
     model: '',
@@ -59,10 +59,10 @@ export class CarFormComponent implements OnInit {
       this.carService.getCars().subscribe(
         (data) => {
           console.log("Data:", data);
-          this.voitures = data.cars;
-          console.log(this.voitures);
+          this.cars = data;
+          console.log(this.cars);
       
-          const carToEdit = this.voitures.find((car) => car.id === this.carId);
+          const carToEdit = this.cars.find((car) => car.id === this.carId);
           if (carToEdit) {
             this.car = { ...carToEdit };
           }
@@ -100,71 +100,72 @@ export class CarFormComponent implements OnInit {
     }
 
     if (this.car.caracteristiques) {
-      this.car.caracteristiques = this.car.caracteristiques.filter(char => char.key || char.value);
+      this.car.caracteristiques = this.car.caracteristiques.filter(char => char.cle || char.value);
     }
 
     // Validation des caractéristiques
     if (this.car.caracteristiques) {
       for (const char of this.car.caracteristiques) {
-        if ((char.key && !char.value) || (!char.key && char.value)) {
+        if ((char.cle && !char.value) || (!char.cle && char.value)) {
           this.errors.caracteristiques = "Les caractéristiques doivent avoir une clé et une valeur si l'une est remplie.";
           break;
         }
       }
     }
-
+  
     if (this.errors.model || this.errors.kmh || this.errors.caracteristiques) {
       console.log('Erreurs front:', this.errors);
       return;
     }
 
-    // Si des erreurs existent, afficher et ne pas soumettre le formulaire
-    if (this.errors.model || this.errors.kmh || this.errors.caracteristiques) {
-      console.log('Erreurs front:', this.errors);
-      return;
-    }
 
     // Envoi de la requête si pas d'erreurs
     if (this.editing) {
       this.isSpinnerActive = true;
-
       this.carService.updateCar(this.carId!, this.car).subscribe(
-        response => {
-          console.log('Voiture mise à jour avec succès', response);
-          this.toastr.success("Voiture mise à jour avec succès", "Succès", {
+        (response) => {
+          console.log('Voiture mise à jour avec succès!');
+          this.isSpinnerActive = false;
+          this.toastr.success('Voiture mise à jour avec succès', 'Succès', {
             timeOut: 3000,
           });
-          this.isSpinnerActive = false;
           this.router.navigate(['/']);
         },
-        error => {
-          console.error(error);
-          this.toastr.error(error, "Erreur", {
-            timeOut: 1000,
+        (error) => {
+          console.error('Erreur lors de la mise à jour de la voiture :', error);
+      
+          this.toastr.error(error, 'Erreur', {
+            timeOut: 5000,
+            enableHtml: true,
           });
+      
           this.isSpinnerActive = false;
         }
       );
 
     } else {
       this.isSpinnerActive = true;
+      console.log("this.car");
+      console.log(this.car);
       
       this.carService.addCar(this.car).subscribe(
-        response => {
+        (response) => {
           console.log('Voiture ajoutée avec succès!');
           this.isSpinnerActive = false;
-          this.toastr.success("Voiture ajoutée avec succès", "Succès", {
+          this.toastr.success('Voiture ajoutée avec succès', 'Succès', {
             timeOut: 3000,
           });
           this.router.navigate(['/']);
         },
-        error => {
-          console.log(error);
-          this.toastr.error(error, "Erreur", {
-            timeOut: 2000,
+        (error) => {
+          console.error('Erreur lors de l\'ajout de la voiture :', error);
+      
+          this.toastr.error(error, 'Erreur', {
+            timeOut: 5000, 
+            enableHtml: true, 
           });
+      
           this.isSpinnerActive = false;
-
         }
       );
     }
@@ -174,7 +175,7 @@ export class CarFormComponent implements OnInit {
     if (!this.car.caracteristiques) {
       this.car.caracteristiques = [];
     }
-    this.car.caracteristiques.push({ key: '', value: '' });
+    this.car.caracteristiques.push({ cle: '', value: '' });
   }
 
   removeCharacteristic(index: number) {

@@ -16,11 +16,11 @@
 
       <mat-form-field class="full-width">
         <mat-label>Vitesse (en Km/h)</mat-label>
-        <input matInput [(ngModel)]="car.kmh" name="kmh" type="number" required />
-        <mat-error *ngIf="!car.kmh">
+        <input matInput [(ngModel)]="car.kmh" name="kmh" type="number" required [min]="1"  />
+        <!-- <mat-error *ngIf="!car.kmh">
           La vitesse est requise
-        </mat-error>
-        <mat-error *ngIf="car.kmh !== null && !isKmValid()">
+        </mat-error> -->
+        <mat-error *ngIf="(car.kmh !== null && !isKmValid()) || !car.kmh">
           Le Vitesse (en Km/h) doit être un nombre valide et supérieur à zéro
         </mat-error>
       </mat-form-field>
@@ -30,7 +30,7 @@
           <div class="flex-fill">
             <mat-form-field class="full-width">
               <mat-label>Caractéristique clé</mat-label>
-              <input matInput [(ngModel)]="char.key" name="key{{i}}" placeholder="Ex: Couleur" required />
+              <input matInput [(ngModel)]="char.cle" name="key{{i}}" placeholder="Ex: Couleur" required />
             </mat-form-field>
 
             <mat-form-field class="full-width">

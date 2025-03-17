@@ -44,21 +44,17 @@ export class TimeCalculationComponent implements OnInit {
 
   }
 
-  // Validation pour la distance
   isDistanceValid(): boolean {
     const distance = parseFloat(this.formData.distance || '');
     return !isNaN(distance) && distance > 0;
   }
 
-
-  // Calculer le temps en fonction des valeurs
   calculateTime(): void {
 
     this.calculatedTime = false;
 
     this.errors = { model: '', distance: '' };
 
-    // Vérification des champs
     if (!this.formData.model) {
       this.errors.model = "Le modèle est requis";
     }
@@ -74,30 +70,35 @@ export class TimeCalculationComponent implements OnInit {
       console.log('Erreurs :', this.errors);
       return;
     }
-
+    
+  
     // Appel au service pour calculer le temps
     this.isSpinnerActive = true;
+    console.log("this.formData");
+    console.log(this.formData);
     this.carService.calculateTime(this.formData).subscribe(
       (result) => {
         console.log('Temps calculé avec succès :', result);
         this.isSpinnerActive = false;
         this.calculatedTime = true;
-        this.calculatedTimeDetails.heures = result.temps.heures;
-        this.calculatedTimeDetails.minutes = result.temps.minutes;
+        this.calculatedTimeDetails.heures = result.heures;
+        this.calculatedTimeDetails.minutes = result.minutes;
 
-        this.toastr.success("Temps estimé affiché", "Résultat", {
+        // Formater le message pour le toastr
+        const message = `Temps estimé : ${result.heures} heures et ${result.minutes} minutes`;
+    
+        this.toastr.success(message, "", {
           timeOut: 3000,
         });
-
       },
       (error) => {
         this.isSpinnerActive = false;
-        console.log('Erreur de calcul du temps :', error);
-
+        console.error('Erreur de calcul du temps :', error);
+    
         this.toastr.error(error, "Erreur", {
-          timeOut: 3000,
+          timeOut: 5000,
+          enableHtml: true,
         });
-
       }
     );
   }

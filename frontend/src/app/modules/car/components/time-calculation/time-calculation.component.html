@@ -17,16 +17,13 @@
         <!-- Distance -->
         <mat-form-field class="full-width">
           <mat-label>Distance (km)</mat-label>
-          <input matInput [(ngModel)]="formData.distance" type="number" name="distance" required />
-          <mat-error *ngIf="!formData.distance">
-            La distance est requise
-          </mat-error>
-          <mat-error *ngIf="formData.distance && !isDistanceValid()">
-            La distance doit être un nombre valide et supérieur à zéro
+          <input matInput [(ngModel)]="formData.distance" type="number" name="distance" required [min]="1" />
+          <mat-error *ngIf="(formData.distance && !isDistanceValid()) || !formData.distance">
+            La distance doit être un nombre positif
           </mat-error>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">Calculer</button>
+        <button mat-raised-button color="primary" class="mt-4" type="submit">Calculer</button>
       </form>
 
       <mat-card-content *ngIf="calculatedTime" class="centered-content">
